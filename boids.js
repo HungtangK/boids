@@ -9,7 +9,7 @@ avoidFactor = 0.05; // Adjust velocity by this %        i.e. separation from fun
 matchingFactor = 0.05; // Adjust by this %              i.e. aligment from matchVelocity()
 // Key parameter ends
 
-numBoids = 100;
+numBoids = 1;
 margin = 200; // from keepWithinBounds(boid)
 turnFactor = 1; // from keepWithinBounds(boid)
 speedLimit = 15; // from limitSpeed()
@@ -30,9 +30,10 @@ function sizeCanvas() {
 
 // Initialization step. FUTURE TODO: make sure that the old bots are cleared as well
 function initBoids() {
-  console.log("Initializing");
+  console.log("Initializing", numBoids);
+  boids = [];
   for (var i = 0; i < numBoids; i += 1) {
-    boids[boids.length] = {
+    boids[i] = {
       x: Math.random() * width,
       y: Math.random() * height,
       dx: Math.random() * 10 - 5,
@@ -234,25 +235,22 @@ window.onload = () => {
 
 // Intearaction with the html
 
-// jquery style
-$("#reset1").on("click",function(){
-  console.log("reset1 Clicked");
-  initBoids();
-})
-
 // old style
-document.getElementById("reset2").onclick = function(){
-  console.log("reset2 Clicked");
+document.getElementById("reset").onclick = function(){
+  console.log("reset Clicked");
   initBoids();
 }
 
 // for slider
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-  output.innerHTML = this.value+"%";
+document.getElementById("slider1").oninput = function() {
+  document.getElementById("demo1").innerHTML = this.value+"%";
   avoidFactor = this.value / 100;
   console.log("value of the slider change to ", avoidFactor);
+}
+
+document.getElementById("slider2").oninput = function() {
+  document.getElementById("demo2").innerHTML = this.value;
+  numBoids = this.value;
+  initBoids();
+  console.log("# of boids changed to  ", numBoids);
 }
