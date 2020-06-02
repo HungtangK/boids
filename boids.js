@@ -3,17 +3,17 @@ let width = 800;
 let height = 400;
 
 // TODO: Display key parameters on the html numboids visual range
-const visualRange = 75; // i.e.visual ragnge
-const centeringFactor = 0.005; // adjust velocity by this %   i.e. coherence from function flyTowardsCenter(bot)
-const avoidFactor = 0.05; // Adjust velocity by this %        i.e. separation from function avoidOthers()
-const matchingFactor = 0.05; // Adjust by this %              i.e. aligment from matchVelocity()
+visualRange = 75; // i.e.visual ragnge
+centeringFactor = 0.005; // adjust velocity by this %   i.e. coherence from function flyTowardsCenter(bot)
+avoidFactor = 0.05; // Adjust velocity by this %        i.e. separation from function avoidOthers()
+matchingFactor = 0.05; // Adjust by this %              i.e. aligment from matchVelocity()
 // Key parameter ends
 
-const numBoids = 100;
-const margin = 200; // from keepWithinBounds(boid)
-const turnFactor = 1; // from keepWithinBounds(boid)
-const speedLimit = 15; // from limitSpeed()
-const minDistance = 20; // The distance to stay away from other boids from avoidOthers()
+numBoids = 100;
+margin = 200; // from keepWithinBounds(boid)
+turnFactor = 1; // from keepWithinBounds(boid)
+speedLimit = 15; // from limitSpeed()
+minDistance = 20; // The distance to stay away from other boids from avoidOthers()
 
 var boids = [];
 
@@ -244,4 +244,15 @@ $("#reset1").on("click",function(){
 document.getElementById("reset2").onclick = function(){
   console.log("reset2 Clicked");
   initBoids();
+}
+
+// for slider
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML = this.value+"%";
+  avoidFactor = this.value / 100;
+  console.log("value of the slider change to ", avoidFactor);
 }
