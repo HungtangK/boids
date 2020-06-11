@@ -1,5 +1,5 @@
 // Size of canvas. These get updated to fill the whole browser.
-let width = 800;
+var width = 800;
 let height = 400;
 
 // TODO: Display key parameters on the html numboids visual range
@@ -10,7 +10,7 @@ matchingFactor = 0.05; // Adjust by this %              i.e. aligment from match
 // Key parameter ends
 
 numBoids = 1;
-margin = 200; // from keepWithinBounds(boid)
+margin = 100; // from keepWithinBounds(boid)
 turnFactor = 1; // from keepWithinBounds(boid)
 speedLimit = 15; // from limitSpeed()
 minDistance = 20; // The distance to stay away from other boids from avoidOthers()
@@ -245,7 +245,7 @@ document.getElementById("reset").onclick = function(){
 document.getElementById("slider1").oninput = function() {
   document.getElementById("demo1").innerHTML = this.value+"%";
   avoidFactor = this.value / 100;
-  console.log("value of the slider change to ", avoidFactor);
+  console.log("Avoidance Factor changed to ", avoidFactor);
 }
 
 document.getElementById("slider2").oninput = function() {
@@ -253,4 +253,34 @@ document.getElementById("slider2").oninput = function() {
   numBoids = this.value;
   initBoids();
   console.log("# of boids changed to  ", numBoids);
+}
+
+document.getElementById("slider3").oninput = function() {
+  document.getElementById("demo3").innerHTML = this.value;
+  visualRange = this.value;
+  initBoids();
+  console.log("Visual Range changed to  ", visualRange);
+}
+
+document.getElementById("slider4").oninput = function() {
+  document.getElementById("demo4").innerHTML = this.value;
+  centeringFactor = this.value / 1000;
+  initBoids();
+  console.log("Centering Factor changed to  ", centeringFactor);
+}
+
+document.getElementById("slider5").oninput = function() {
+  document.getElementById("demo5").innerHTML = this.value;
+  matchingFactor = this.value / 100;
+  initBoids();
+  console.log("Speed Matching Factor changed to  ", matchingFactor);
+}
+
+document.getElementById("slider6").oninput = function() {
+  document.getElementById("demo6").innerHTML = this.value;
+  document.getElementById("boids").width = this.value;
+  width = this.value;
+  ctx.clearRect(0, 0, width, height);
+  initBoids();
+  console.log("Window width changed to  ", width);
 }
